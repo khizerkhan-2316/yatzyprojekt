@@ -16,15 +16,11 @@
             <div class="main-container">
       <div class="errorContainer">
         <div class="heading">
-          <h2>Invalid input</h2>
+          <h2></h2>
         </div>
         <p></p>
         <div class="button-container">
-          <Button
-            
-            class="button"
-            
-          >
+          <Button class="button">
           
             Okay
           </Button>
@@ -54,8 +50,8 @@
             </div>
 
             <div class="roll-control">
-              <p>Turn: 0 </p>
-              <p>Round 1/13</p>
+              <p>Rolls: 0 </p>
+              <p>Round: 1/15</p>
               <button>Roll</button>
             </div>
           </div>
@@ -78,10 +74,10 @@
              <div class="sum-and-bonus-container">
                   <input type="text" name="6s" class="samefacevalue textfield" readonly="readonly" />
                 <label for="sum">Sum:</label>
-              <input type="text" name="sum"  class="textfield" readonly="readonly"/>
+              <input type="text" name="sum"  class="textfield" readonly="readonly" placeholder="0" disabled/>
 
               <label for="bonus">Bonus:</label>
-              <input name="bonus" type="text" class="textfield" readonly="readonly" />
+              <input name="bonus" type="text" class="textfield" readonly="readonly"  placeholder="0" disabled/> 
              </div>
               <label for="onepair">One pair</label>
               <input name="onepair" type="text" class="textfield" readonly="readonly" />
@@ -104,17 +100,17 @@
              </div>
            
               <div class="total-container">
-                    <input name="yatzy" id="ipYatzy" type="text" class="textfield" readonly="readonly" />
+                    <input name="yatzy" type="text" class="textfield" readonly="readonly" />
                     <label for="total" ">Total:</label>
-                    <input type="text" name="total" disabled="disabled"/>
+                    <input type="text" name="total" class = "textfield" disabled="disabled"  placeholder="0"/>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <script src="javascript/script.js" type="module" async defer></script>
-        <script src="javascript/scriptlogic.js" async defer></script>
+            <script src="javascript/Yatsy.js" type="module" async defer></script>
+    <script src="javascript/DOM.js" type="module" async defer></script>
 
     
   </body>

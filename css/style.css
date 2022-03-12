@@ -126,9 +126,11 @@ button {
   text-align: center;
 }
 
-button:hover {
+button:hover,
+.bottom-game-container input:hover {
   box-shadow: var(--light-mode-boxshadowhover);
   transition: 0.3s;
+  cursor: pointer;
 }
 
 .bottom-game-container {
@@ -143,6 +145,12 @@ button:hover {
   height: 20px;
   border-radius: 5px;
   margin-left: 10px;
+  text-align: center;
+  border: 1px solid white;
+}
+
+input[disabled] {
+  background-color: #400000;
 }
 
 .bottom-game-container label {
