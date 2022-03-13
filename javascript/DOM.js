@@ -1,5 +1,6 @@
 import Dice from './Dice.js';
 import Yatzy from './Yatzy.js';
+import History from './History.js';
 
 ///// DOM nodes
 const dices = document.querySelectorAll('.dice');
@@ -8,16 +9,21 @@ const rollButton = document.querySelectorAll('button')[1];
 const paragrafs = document.querySelectorAll('p');
 
 const textFields = document.querySelectorAll('.textfield');
+
 const sumTextField = document.querySelector('.sumTextField');
 const bonusTextField = document.querySelector('.bonusTextField');
 const totalTextField = document.querySelector('.total');
 
-const playAgainButton = document.querySelector('button');
+const modalButton = document.querySelector('button');
 const modalHeading = document.querySelector('h2');
 const modal = document.querySelector('.main-container');
 
+const historyButton = document.querySelector('.history');
+
+let selectedField = null;
+
 //objects
-const allDices = [
+let allDices = [
   new Dice(0, false),
   new Dice(0, false),
   new Dice(0, false),
@@ -25,7 +31,8 @@ const allDices = [
   new Dice(0, false),
 ];
 
-const game = new Yatzy(allDices);
+let game = new Yatzy(allDices);
+const history = new History();
 
 // eventlisteners
 
@@ -48,13 +55,19 @@ checkboxes.forEach((checkbox, index) => {
 textFields.forEach((field) => {
   field.addEventListener('click', () => {
     if (game.getRollCount() >= 1) {
+      selectedField = field;
+      game.addResult(parseInt(selectedField.value), game.getResultIndex());
       sumPoints(field);
       disableField(field);
       resetRound();
       calculateSum(field);
       addBonus();
+    } else if (game.getRollCount() === 0 && game.getRoundsCount() > 1) {
+      const oldField = selectedField;
+      selectedField = field;
+      changeFieldValue(oldField, field);
     } else {
-      modal.style.display = 'flex';
+      showModal('Caution', "You can't select a textfield before rolling");
     }
 
     resetGame();
@@ -63,6 +76,14 @@ textFields.forEach((field) => {
 
 modal.addEventListener('click', () => {
   modal.style.display = 'none';
+});
+
+historyButton.addEventListener('click', () => {
+  if (history.getHistory().length > 0) {
+    gameStatistics();
+  } else {
+    showModal('Not Found!', 'Not found any history of games');
+  }
 });
 
 //// Eventlistener end
@@ -80,19 +101,37 @@ const updateFields = () => {
   textFields.forEach((textfield, index) => {
     if (!textfield.disabled) {
       textfield.value !== undefined
-        ? (textfield.value = game.getResults()[index])
+        ? (textfield.value = game.getroundResults()[index])
         : (textfield.value = 0);
     }
   });
 };
 
-const addBonus = () => {
-  if (game.getSum() >= 63 && !game.getGotBonus()) {
-    game.setGotBonus(true);
-    game.setTotal(game.getTotal() + 50);
-    bonusTextField.value = game.getBonus();
-    totalTextField.value = game.getTotal();
-  }
+const changeFieldValue = (oldField, newField) => {
+  enableField(oldField);
+  disableField(newField);
+  reCalculateTotal(oldField, newField);
+  reCalculateSum();
+  addChangedResult(newField);
+};
+
+const addChangedResult = (newField) => {
+  game.decrementResultIndex();
+  game.addResult(parseInt(newField.value), game.getResultIndex());
+};
+
+const reCalculateTotal = (oldField, newField) => {
+  game.setTotal(
+    game.getTotal() - parseInt(oldField.value) + parseInt(newField.value)
+  );
+  totalTextField.value = game.getTotal();
+};
+
+const reCalculateSum = () => {
+  game.setSum(0);
+  textFields.forEach((field) => {
+    calculateSum(field);
+  });
 };
 
 const calculateSum = (field) => {
@@ -106,6 +145,15 @@ const sumPoints = (field) => {
   game.setTotal(game.getTotal() + parseInt(field.value));
 
   totalTextField.value = game.getTotal();
+};
+
+const addBonus = () => {
+  if (game.getSum() >= 63 && !game.getGotBonus()) {
+    game.setGotBonus(true);
+    game.setTotal(game.getTotal() + 50);
+    bonusTextField.value = game.getBonus();
+    totalTextField.value = game.getTotal();
+  }
 };
 
 const isDieHolded = (checkbox) => {
@@ -129,6 +177,11 @@ const disableField = (field) => {
   field.style.backgroundColor = '#400000';
 };
 
+const enableField = (field) => {
+  field.disabled = false;
+  field.style.backgroundColor = '#000';
+};
+
 // Reset round and restart game
 
 const resetRound = () => {
@@ -141,7 +194,6 @@ const resetRound = () => {
   allDices.forEach((die, index) => {
     die.setValue(0);
     die.setIsHold(false);
-    dices[index].value = '?';
     checkboxes[index].checked = false;
     checkboxes[index].disabled = true;
   });
@@ -160,26 +212,36 @@ const gameOver = () => {
 };
 const resetGame = () => {
   if (gameOver()) {
+    history.addGame(game);
+
     setTimeout(() => {
-      modalHeading.innerHTML = 'Game Over';
-      paragrafs[0].innerHTML =
-        'Wanna play again? Press the button otherwise press anywhere else';
-      modal.style.display = 'flex';
+      showModal(
+        'Game Over',
+        'Wanna play again? Press the button otherwise press anywhere else'
+      );
     }, 1000);
 
-    playAgainButton.addEventListener('click', () => {
+    modalButton.addEventListener('click', () => {
       PlayAgain();
     });
   }
 };
 
 const PlayAgain = () => {
-  clearTextAllTextFields();
-  game.resetGame();
+  allDices = [
+    new Dice(0, false),
+    new Dice(0, false),
+    new Dice(0, false),
+    new Dice(0, false),
+    new Dice(0, false),
+  ];
+  game = new Yatzy(allDices);
   paragrafs[2].innerHTML = 'Round: ' + game.getRoundsCount() + '/15';
   sumTextField.value = '0';
   bonusTextField.value = '0';
   totalTextField.value = '0';
+  clearTextAllTextFields();
+  clearDices();
 };
 
 const clearTextAllTextFields = () => {
@@ -190,4 +252,22 @@ const clearTextAllTextFields = () => {
   });
 };
 
-const gameStatistics = () => {};
+const clearDices = () => {
+  dices.forEach((dice) => (dice.value = '?'));
+};
+
+const showModal = (heading, paragraf) => {
+  modalHeading.innerHTML = heading;
+  paragrafs[0].innerHTML = paragraf;
+  modal.style.display = 'flex';
+};
+
+const gameStatistics = () => {
+  const statistics = history.getHistory().map((game, index) => {
+    return '' + (index + 1) + ',' + game.toString() + '\n';
+  });
+
+  alert(
+    'Game number: ' + 'total: ' + 'sum: ' + 'got bonus: \n' + [...statistics]
+  );
+};

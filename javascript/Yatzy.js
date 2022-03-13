@@ -7,8 +7,9 @@ class Yatzy {
     this.bonus = 50;
     this.sum = 0;
     this.dices = dices;
+    this.roundResults = new Array(15);
     this.results = new Array(15);
-    this.history = [];
+    this.resultIndex = 0;
   }
 
   incrementRollCount() {
@@ -63,6 +64,23 @@ class Yatzy {
     return this.sum;
   }
 
+  addResult(result, index) {
+    this.results[index] = result;
+    this.resultIndex++;
+  }
+
+  getResults() {
+    return this.results;
+  }
+
+  getResultIndex() {
+    return this.resultIndex;
+  }
+
+  decrementResultIndex() {
+    this.resultIndex--;
+  }
+
   rollDices() {
     this.incrementRollCount();
     this.dices.forEach((die) => {
@@ -84,25 +102,25 @@ class Yatzy {
     return freq;
   }
 
-  setResults() {
+  setroundResults() {
     for (let i = 0; i <= 5; i++) {
-      this.results[i] = this.checkSameFaceValue(i + 1);
+      this.roundResults[i] = this.checkSameFaceValue(i + 1);
     }
 
-    this.results[6] = this.getHighestScoreByEqualFaces(2);
-    this.results[7] = this.twoPairPoints();
-    this.results[8] = this.getHighestScoreByEqualFaces(3);
-    this.results[9] = this.getHighestScoreByEqualFaces(4);
-    this.results[10] = this.fullHousePoints();
-    this.results[11] = this.smallStraightPoints();
-    this.results[12] = this.largestraightPoints();
-    this.results[13] = this.chancePoints();
-    this.results[14] = this.yatzyPoints();
+    this.roundResults[6] = this.getHighestScoreByEqualFaces(2);
+    this.roundResults[7] = this.twoPairPoints();
+    this.roundResults[8] = this.getHighestScoreByEqualFaces(3);
+    this.roundResults[9] = this.getHighestScoreByEqualFaces(4);
+    this.roundResults[10] = this.fullHousePoints();
+    this.roundResults[11] = this.smallStraightPoints();
+    this.roundResults[12] = this.largestraightPoints();
+    this.roundResults[13] = this.chancePoints();
+    this.roundResults[14] = this.yatzyPoints();
   }
 
-  getResults() {
-    this.setResults();
-    return this.results;
+  getroundResults() {
+    this.setroundResults();
+    return this.roundResults;
   }
 
   checkSameFaceValue(value) {
@@ -225,13 +243,8 @@ class Yatzy {
     this.setRollCount(0);
   }
 
-  resetGame() {
-    this.setRoundsCount(1);
-    this.setRollCount(0);
-    this.setTotal(0);
-    this.setGotBonus(false);
-    this.setSum(0);
-    this.results = new Array(15);
+  toString() {
+    return [this.total, this.sum, this.gotBonus];
   }
 }
 
