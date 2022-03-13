@@ -1,117 +1,121 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Yatzy Projekt</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/ErrorModal.css" />
 
-  </head>
-  <body>
-        <div class="error-modal">
-            <div class="main-container">
-      <div class="errorContainer">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Yatzy Projekt</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/ErrorModal.css" />
+
+</head>
+
+<body>
+  <div class="modal">
+    <div class="main-container">
+      <div class="modalContainer">
         <div class="heading">
-          <h2></h2>
+          <h2>Caution</h2>
         </div>
-        <p></p>
+        <p>You can't select a textfield before rolling</p>
         <div class="button-container">
           <Button class="button">
-          
+
             Okay
           </Button>
         </div>
       </div>
     </div>
-        </div>
-    <div class="maincontainer-flex">
-      <div class="background-container">
-        <div class="game-container-grid">
-          <div class="top-game-container">
-            <div class="dices-container">
-              <input type="text" placeholder="?" readonly="readonly" class="dice" />
-              <input type="text" placeholder="?" readonly="readonly" class="dice" />
-              <input type="text" placeholder="?" readonly="readonly" class="dice" />
-              <input type="text" placeholder="?" readonly="readonly" class="dice"/>
-              <input type="text" placeholder="?" readonly="readonly" class="dice" />
-            </div>
+  </div>
 
-            <div class="checkbox-control">
-            <input class="checkbox" type="checkbox" disabled/>    
-            <input class="checkbox" type="checkbox" disabled/>    
-            <input class="checkbox" type="checkbox" disabled/>    
-            <input class="checkbox" type="checkbox" disabled/>    
-            <input class="checkbox" type="checkbox" disabled/>    
 
-            </div>
-
-            <div class="roll-control">
-              <p>Rolls: 0 </p>
-              <p>Round: 1/15</p>
-              <button>Roll</button>
-            </div>
+  <div class="maincontainer-flex">
+    <div class="background-container">
+      <div class="game-container-grid">
+        <div class="top-game-container">
+          <div class="dices-container">
+            <input type="text" placeholder="?" readonly="readonly" class="dice" />
+            <input type="text" placeholder="?" readonly="readonly" class="dice" />
+            <input type="text" placeholder="?" readonly="readonly" class="dice" />
+            <input type="text" placeholder="?" readonly="readonly" class="dice" />
+            <input type="text" placeholder="?" readonly="readonly" class="dice" />
           </div>
-          <div class="bottom-game-container">
-            <label for="1s">1-s</label>
-            <input type="text" name="1s" class="samefacevalue textfield" readonly="readonly" />
-              <label for="2s">2-s</label>
-              <input name="2s" type="text" class="samefacevalue textfield" readonly="readonly" />
-              <label for="3s">3-s</label>
-              <input name="3s" type="text" class="samefacevalue textfield" readonly="readonly" />
-              <label for="4s">4-s</label>
-              <input type="text"  name="4s" class="samefacevalue textfield" readonly="readonly" />
-              <label for="5s">5-s</label>
-              <input type="text" name="5s" class="samefacevalue textfield" readonly="readonly"/>
-             <div class="6-container">
-                <label for="6s">6-s</label>
-             
-              
-             </div>
-             <div class="sum-and-bonus-container">
-                  <input type="text" name="6s" class="samefacevalue textfield" readonly="readonly" />
-                <label for="sum">Sum:</label>
-              <input type="text" name="sum"  class="textfield" readonly="readonly" placeholder="0" disabled/>
 
-              <label for="bonus">Bonus:</label>
-              <input name="bonus" type="text" class="textfield" readonly="readonly"  placeholder="0" disabled/> 
-             </div>
-              <label for="onepair">One pair</label>
-              <input name="onepair" type="text" class="textfield" readonly="readonly" />
-              <label for="twopairs">Two pairs</label>
-              <input type="text" name="twopairs" class="textfield" readonly="readonly"/>
-              <label for="threesame">Three same</label>
-              <input name="threesame" type="text" class="textfield" readonly="readonly"/>
-              <label for="foursame">Four same</label>
-              <input name="foursame" type="text" class="textfield" readonly="readonly" />
-              <label for="fullhouse">Full house</label>
-              <input type="text" name="fullhouse" class="textfield" readonly="readonly" />
-              <label for="smallStraight" >Small straight</label>
-              <input name="smallStraight" type="text" class="textfield" readonly="readonly" />
-              <label for="largeStraight">Large straight</label>
-              <input name="largeStraight" type="text" class="textfield" readonly="readonly" />
-              <label for="chance">Chance</label>
-              <input name="chance" type="text" class="textfield" readonly="readonly" />
-             <div class="yatzy">
-                  <label for="yatzy">Yatsy</label>
-             </div>
-           
-              <div class="total-container">
-                    <input name="yatzy" type="text" class="textfield" readonly="readonly" />
-                    <label for="total" ">Total:</label>
-                    <input type="text" name="total" class = "textfield" disabled="disabled"  placeholder="0"/>
-              </div>
-            </div>
+          <div class="checkbox-control">
+            <input class="checkbox" type="checkbox" disabled />
+            <input class="checkbox" type="checkbox" disabled />
+            <input class="checkbox" type="checkbox" disabled />
+            <input class="checkbox" type="checkbox" disabled />
+            <input class="checkbox" type="checkbox" disabled />
+
+          </div>
+
+          <div class="roll-control">
+            <p>Rolls: 0 </p>
+            <p>Round: 1/15</p>
+            <button>Roll</button>
+          </div>
+        </div>
+        <div class="bottom-game-container">
+          <label for="1s">1-s</label>
+          <input type="text" name="1s" class="upperTextFields textfield" readonly="readonly" />
+          <label for="2s">2-s</label>
+          <input name="2s" type="text" class="upperTextFields textfield" readonly="readonly" />
+          <label for="3s">3-s</label>
+          <input name="3s" type="text" class="upperTextFields textfield" readonly="readonly" />
+          <label for="4s">4-s</label>
+          <input type="text" name="4s" class="upperTextFields textfield" readonly="readonly" />
+          <label for="5s">5-s</label>
+          <input type="text" name="5s" class="upperTextFields textfield" readonly="readonly" />
+          <div class="6-container">
+            <label for="6s">6-s</label>
+
+
+          </div>
+          <div class="sum-and-bonus-container">
+            <input type="text" name="6s" class="upperTextFields textfield" readonly="readonly" />
+            <label for="sum">Sum:</label>
+            <input type="text" name="sum" class="sumTextField" readonly="readonly" placeholder="0" disabled id="sum" />
+
+            <label for="bonus">Bonus:</label>
+            <input name="bonus" type="text" class="bonusTextField" readonly="readonly" placeholder="0" disabled id="bonus" />
+          </div>
+          <label for="onepair">One pair</label>
+          <input name="onepair" type="text" class="textfield" readonly="readonly" />
+          <label for="twopairs">Two pairs</label>
+          <input type="text" name="twopairs" class="textfield" readonly="readonly" />
+          <label for="threesame">Three same</label>
+          <input name="threesame" type="text" class="textfield" readonly="readonly" />
+          <label for="foursame">Four same</label>
+          <input name="foursame" type="text" class="textfield " readonly="readonly" />
+          <label for="fullhouse">Full house</label>
+          <input type="text" name="fullhouse" class="textfield" readonly="readonly" />
+          <label for="smallStraight">Small straight</label>
+          <input name="smallStraight" type="text" class="textfield" readonly="readonly" />
+          <label for="largeStraight">Large straight</label>
+          <input name="largeStraight" type="text" class="textfield" readonly="readonly" />
+          <label for="chance">Chance</label>
+          <input name="chance" type="text" class="textfield" readonly="readonly" />
+          <div class="yatzy">
+            <label for="yatzy">Yatsy</label>
+          </div>
+
+          <div class="total-container">
+            <input name="yatzy" type="text" class="textfield" readonly="readonly" />
+            <label for="total" ">Total:</label>
+                    <input type=" text" name="total" class="total" disabled="disabled" placeholder="0" id="total" />
           </div>
         </div>
       </div>
     </div>
-            <script src="javascript/Yatsy.js" type="module" async defer></script>
-    <script src="javascript/DOM.js" type="module" async defer></script>
+  </div>
+  </div>
+  <script src="javascript/DOM.js" type="module" async defer></script>
 
-    
-  </body>
+
+</body>
+
 </html>

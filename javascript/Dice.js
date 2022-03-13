@@ -1,16 +1,7 @@
 export default class Dice {
-  constructor(index, value, isHold) {
-    this.index = index;
+  constructor(value, isHold) {
     this.value = value;
     this.isHold = isHold;
-  }
-
-  getIndex() {
-    return this.index;
-  }
-
-  setIndex(index) {
-    this.index = index;
   }
 
   getValue() {
