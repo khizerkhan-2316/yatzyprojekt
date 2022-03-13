@@ -184,7 +184,7 @@ const PlayAgain = () => {
 
 const clearTextAllTextFields = () => {
   textFields.forEach((field) => {
-    field.style.backgroundColor = '#FFFFFF';
+    field.style.backgroundColor = '#000';
     field.disabled = false;
     field.value = '';
   });
