@@ -1,4 +1,4 @@
-export default class Dice {
+class Die {
   constructor(value, isHold) {
     this.value = value;
     this.isHold = isHold;
@@ -20,3 +20,5 @@ export default class Dice {
     this.isHold = isHold;
   }
 }
+
+export default Die;

@@ -1,4 +1,4 @@
-import Dice from './Dice.js';
+import Die from './Die.js';
 import Yatzy from './Yatzy.js';
 import History from './History.js';
 
@@ -24,11 +24,11 @@ let selectedField = null;
 
 //objects
 let allDices = [
-  new Dice(0, false),
-  new Dice(0, false),
-  new Dice(0, false),
-  new Dice(0, false),
-  new Dice(0, false),
+  new Die(0, false),
+  new Die(0, false),
+  new Die(0, false),
+  new Die(0, false),
+  new Die(0, false),
 ];
 
 let game = new Yatzy(allDices);
@@ -229,11 +229,11 @@ const resetGame = () => {
 
 const PlayAgain = () => {
   allDices = [
-    new Dice(0, false),
-    new Dice(0, false),
-    new Dice(0, false),
-    new Dice(0, false),
-    new Dice(0, false),
+    new Die(0, false),
+    new Die(0, false),
+    new Die(0, false),
+    new Die(0, false),
+    new Die(0, false),
   ];
   game = new Yatzy(allDices);
   paragrafs[2].innerHTML = 'Round: ' + game.getRoundsCount() + '/15';

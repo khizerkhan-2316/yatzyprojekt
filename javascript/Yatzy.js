@@ -83,7 +83,7 @@ class Yatzy {
 
   rollDices() {
     this.incrementRollCount();
-    this.dices.forEach((die) => {
+    this.dices.forEach((die, index) => {
       if (!die.getIsHold()) {
         const randomnumber = Math.floor(Math.random() * 6 + 1);
         die.setValue(randomnumber);
@@ -124,16 +124,15 @@ class Yatzy {
   }
 
   checkSameFaceValue(value) {
-    let points = 0;
-    this.dices.forEach((dice) => {
-      dice.getValue() === value ? (points += value) : 0;
-    });
-
-    return points;
+    return this.dices
+      .map((dice) => {
+        return dice.getValue() === value ? value : 0;
+      })
+      .reduce((a, b) => a + b, 0);
   }
 
   getHighestScoreByEqualFaces(equalfaces) {
-    return this.getHighestScoreByEqualFacesHelper(equalfaces, false); // kaldes getHighestScoreByEqualFacess
+    return this.getHighestScoreByEqualFacesHelper(equalfaces, false);
   }
 
   getHighestScoreByEqualFacesHelper(equalfaces, exactly) {
@@ -158,7 +157,7 @@ class Yatzy {
     let sum = 0;
     let count = 0;
 
-    freq.forEach((freq, index) => {
+    freq.map((freq, index) => {
       if (freq >= 2) {
         sum += index * 2;
         count++;
@@ -169,6 +168,7 @@ class Yatzy {
   }
 
   fullHousePoints() {
+    // maybe refactor and check if its correct result
     let points = 0;
     let threeEquals = this.getHighestScoreByEqualFaces(3, true);
     let twoEquals = this.getHighestScoreByEqualFaces(2, true);
@@ -185,6 +185,7 @@ class Yatzy {
   }
 
   smallStraightPoints() {
+    // maybe refactor
     const freq = this.calcCounts();
 
     let points = 0; //
@@ -201,6 +202,7 @@ class Yatzy {
   }
 
   largestraightPoints() {
+    // maybe refactor
     const freq = this.calcCounts();
 
     let points = 0; //
@@ -219,23 +221,16 @@ class Yatzy {
   chancePoints() {
     const freq = this.calcCounts();
     let points = 0;
-    for (let i = 1; i <= 6; i++) {
-      if (freq[i] !== undefined) {
-        points += freq[i] * i;
-      }
-    }
 
+    for (let i = 1; i <= 6; i++) {
+      freq[i] !== undefined ? (points += freq[i] * i) : 0;
+    }
     return points;
   }
 
   yatzyPoints() {
     const points = this.getHighestScoreByEqualFaces(5, true);
-
-    if (points > 0) {
-      return 50;
-    } else {
-      return 0;
-    }
+    return points > 0 ? 50 : 0;
   }
 
   resetRound() {

@@ -168,19 +168,10 @@ button:hover,
 }
 
 .history {
-  margin-bottom: 100px;
   width: auto;
   text-align: center;
-}
-
-.history-container {
-  width: auto;
-  height: 100vh;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  z-index: 1000;
-  position: absolute;
+  margin-left: 9%;
+  margin-bottom: 3px;
 }
 
 @media screen and (max-width: 1473px) {
