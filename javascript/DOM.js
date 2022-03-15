@@ -40,7 +40,7 @@ checkboxes.forEach((checkbox, index) => {
   checkbox.addEventListener('click', () => {
     isDieHolded(checkbox)
       ? game.getAllDices()[index].setIsHold(true)
-      : allDices.getAllDices()[index].setIsHold(false);
+      : game.getAllDices()[index].setIsHold(false);
   });
 });
 
