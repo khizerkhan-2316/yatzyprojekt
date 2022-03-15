@@ -1,4 +1,3 @@
-import Die from './Die.js';
 import Yatzy from './Yatzy.js';
 import History from './History.js';
 
@@ -23,15 +22,8 @@ const historyButton = document.querySelector('.history');
 let selectedField = null;
 
 //objects
-let allDices = [
-  new Die(0, false),
-  new Die(0, false),
-  new Die(0, false),
-  new Die(0, false),
-  new Die(0, false),
-];
 
-let game = new Yatzy(allDices);
+let game = new Yatzy();
 const history = new History();
 
 // eventlisteners
@@ -47,8 +39,8 @@ rollButton.addEventListener('click', () => {
 checkboxes.forEach((checkbox, index) => {
   checkbox.addEventListener('click', () => {
     isDieHolded(checkbox)
-      ? allDices[index].setIsHold(true)
-      : allDices[index].setIsHold(false);
+      ? game.getAllDices()[index].setIsHold(true)
+      : allDices.getAllDices()[index].setIsHold(false);
   });
 });
 
@@ -92,7 +84,7 @@ historyButton.addEventListener('click', () => {
 
 const updateDices = () => {
   paragrafs[1].innerHTML = 'Rolls: ' + game.getRollCount();
-  allDices.forEach((die, index) => {
+  game.getAllDices().forEach((die, index) => {
     dices[index].value = die.getValue();
   });
 };
@@ -191,7 +183,7 @@ const resetRound = () => {
   }
   paragrafs[1].innerHTML = 'Rolls: ' + game.getRollCount();
   rollButton.disabled = false;
-  allDices.forEach((die, index) => {
+  game.getAllDices().forEach((die, index) => {
     die.setValue(0);
     die.setIsHold(false);
     checkboxes[index].checked = false;
@@ -228,14 +220,7 @@ const resetGame = () => {
 };
 
 const PlayAgain = () => {
-  allDices = [
-    new Die(0, false),
-    new Die(0, false),
-    new Die(0, false),
-    new Die(0, false),
-    new Die(0, false),
-  ];
-  game = new Yatzy(allDices);
+  game = new Yatzy();
   paragrafs[2].innerHTML = 'Round: ' + game.getRoundsCount() + '/15';
   sumTextField.value = '0';
   bonusTextField.value = '0';
